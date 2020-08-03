@@ -25,7 +25,7 @@ class WeatherDeatilsController: UIViewController {
         self.humudityLbl.text = cityHumidity + "%"
         self.pressueLbl.text = cityPressure + "hPa"
         self.speedLbl.text = citySpeed + "km/hr"
-        
+        print(country)
         // Do any additional setup after loading the view.
     }
     
