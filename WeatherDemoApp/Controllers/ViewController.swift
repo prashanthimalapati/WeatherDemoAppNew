@@ -129,7 +129,7 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                         
                         DispatchQueue.main.async {
                             DatabaseHandler.saveObject(cityName: cityName ?? "", cityTimeZone: cityTimeZone , cityTemp: cityTemp , humudity: cityHumidity , pressure: cityPressure , speed: citySpeed , country: country )
-                            self.getLocationData()
+//                            self.getLocationData()
                         }
                     }
                 }
