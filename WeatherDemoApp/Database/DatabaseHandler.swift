@@ -87,8 +87,7 @@ class DatabaseHandler: NSObject {
         }
     }
     
-    static func
-        checkcityAvailable(cityName: String) -> Int{
+    static func checkCityExist(cityName: String) -> Int{
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         var items = [WeatherData]()
         let fetchRequest: NSFetchRequest<WeatherData> = WeatherData.fetchRequest()
@@ -104,13 +103,7 @@ class DatabaseHandler: NSObject {
             }
             else {
                 // print("at least one matching object exists")
-                do {
-                    items = try context.fetch(fetchRequest as! NSFetchRequest<NSFetchRequestResult>) as! [WeatherData]
-                } catch {
-                    fatalError("Failed to fetch itemList: \(error)")
-                }
-                let managedObject = items[0]
-//                return Int(managedObject.cityTemp ?? "0") ?? 0
+                return 1
             }
         }
         catch let error as NSError {

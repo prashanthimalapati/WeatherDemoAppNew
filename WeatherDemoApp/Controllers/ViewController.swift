@@ -128,9 +128,17 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                       let country = locationData.sys?.country ?? ""
                         
                         DispatchQueue.main.async {
-                            DatabaseHandler.saveObject(cityName: cityName ?? "", cityTimeZone: cityTimeZone , cityTemp: cityTemp , humudity: cityHumidity , pressure: cityPressure , speed: citySpeed , country: country )
-//                            self.getLocationData()
+                            if DatabaseHandler.checkCityExist(cityName: cityName!) == 0{
+                                DatabaseHandler.saveObject(cityName: cityName ?? "", cityTimeZone: cityTimeZone , cityTemp: cityTemp , humudity: cityHumidity , pressure: cityPressure , speed: citySpeed , country: country )
+                                self.getLocationData()
+                            }
                         }
+                    }
+                    else{
+                        DispatchQueue.main.async {
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                        AppUtils.showAlertMessage(message: AppUtils.CITYERROr)
                     }
                 }
             }
@@ -139,13 +147,8 @@ extension ViewController: GMSAutocompleteViewControllerDelegate {
                 print("Parse Error: \(error)")
             }
         }
-        
-        
         // Dismiss the GMSAutocompleteViewController when something is selected
         dismiss(animated: true, completion: nil)
-        
-        
-        
     }
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // Handle the error
